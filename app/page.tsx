@@ -10,6 +10,7 @@ import { Sostenibilidad } from "@/components/sostenibilidad";
 import { Ubicacion } from "@/components/ubicacion";
 import { CtaContacto } from "@/components/cta-contacto";
 import { Footer } from "@/components/footer";
+import LocationShowcase from "@/components/ubicacion/LocationShowcase";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
 
         {/* 8. Ubicación */}
         <Ubicacion />
+        <LocationShowcase />
 
         {/* 9. CTA de Contacto */}
         <CtaContacto />
