@@ -71,9 +71,11 @@ Este sitio **no es para producción**: es una **demostración para mostrar al cl
 Cuando haga falta ejecutar comandos en la terminal (instalar paquetes, init de shadcn, etc.), el desarrollador los ejecuta en su máquina; ver la directiva del proyecto en `.cursor/rules/` sobre indicar los comandos por chat.
 
 ```bash
-pnpm add gsap @studio-freight/lenis split-type
+pnpm add gsap lenis split-type
 # shadcn se instala con: pnpm dlx shadcn@latest init
 ```
+
+> **Nota:** El paquete de smooth scroll es **lenis** (no `@studio-freight/lenis`); el nombre oficial del paquete es solo `lenis`.
 
 ---
 
@@ -634,7 +636,7 @@ Esto aplica especialmente al **navbar** (parte superior) y al **footer** (parte 
 - **Performance:** Usar `will-change: transform` en elementos que se animarán. Las imágenes deben pasarse por el componente `<Image>` de Next.js para optimización automática.
 - **CSS Variables:** Definir las variables de color en `:root` (en `globals.css`) después de tener shadcn instalado, para integrarlas con el tema de shadcn.
 - **Navbar sticky:** Debe permanecer visible al hacer scroll pero cambiar de estilo (transparente → opaco con blur). En mobile el overlay se maneja por separado.
-- **Smooth scroll:** Lenis debe estar activo en toda la página desde el layout global. En mobile verificar que no conflicte con el scroll nativo del dispositivo.
+- **Smooth scroll:** Lenis se integra en la **página principal** (`app/page.tsx`), no en el layout, de modo que solo actúe en la home. En mobile verificar que no conflicte con el scroll nativo del dispositivo.
 - **Loader inicial:** Considerar un loader simple mientras cargan las fuentes y la imagen del hero para evitar el flash de contenido sin estilo.
 - **Rutas futuras:** Esta directriz cubre únicamente el Home (landing). Las rutas Libro de Reclamaciones, Términos y Condiciones, Contacto, etc. se implementarán después como páginas separadas de Next.js.
 
@@ -651,30 +653,37 @@ No es prioridad en esta fase (proyecto de presentación al cliente). Implementar
 Checklist para desarrollar la landing en orden. Marcar según se complete.
 
 ### Setup
-- [ ] Instalar shadcn/ui (`pnpm dlx shadcn@latest init`) y componentes necesarios (Button, Card, Sheet, etc.)
-- [ ] Instalar dependencias: `pnpm add gsap @studio-freight/lenis split-type`
-- [ ] Configurar variables de color en `globals.css` integradas con el tema de shadcn (paleta §2.1)
-- [ ] Layout: fuentes Playfair Display + DM Sans, metadata y `lang="es"` (TODO SEO)
+- [x] Instalar shadcn/ui (`pnpm dlx shadcn@latest init`) y componentes necesarios (Button, Card, Sheet, etc.)
+- [x] Instalar dependencias: `pnpm add gsap lenis split-type`
+- [x] Configurar variables de color en `globals.css` integradas con el tema de shadcn (paleta §2.1)
+- [x] Layout: fuentes Playfair Display + DM Sans, metadata y `lang="es"` (TODO SEO)
 
 ### Estructura base
-- [ ] Definir IDs de sección en la home: `#inicio`, `#el-proyecto`, `#caracteristicas`, `#avance-de-obra`, `#ubicacion`, `#contacto` (CTA)
-- [ ] Integrar Lenis (smooth scroll) en layout o página principal
+- [x] Definir IDs de sección en la home: `#inicio`, `#el-proyecto`, `#caracteristicas`, `#estadisticas`, `#avance-de-obra`, `#distribucion`, `#sostenibilidad`, `#ubicacion`, `#contacto` (CTA)
+- [x] Integrar Lenis (smooth scroll) en la **página principal** (`app/page.tsx`), no en el layout
 - [ ] (Opcional) Loader inicial mientras cargan fuentes/hero
 
 ### Componentes y secciones (orden sugerido)
-- [ ] **Navbar:** estructura desktop (logo, links a anclas, botón Agendar Visita) + mobile (hamburguesa, Sheet overlay), transparente → opaco al scroll
-- [ ] **Hero:** fullscreen, imagen de fondo (placeholder si falta), texto y CTA, animaciones (SplitType título, zoom imagen, secuencia)
-- [ ] **Sobre el Edificio:** dos columnas, texto + imagen, animaciones al scroll
-- [ ] **Características & Amenities:** grid de cards (6 ítems), iconos SVG, stagger y hover
-- [ ] **Estadísticas del Edificio:** 4 contadores animados (7, 12, 13, 1 940), fondo oscuro
-- [ ] **Avance de Obra:** timeline vertical, hitos con estados (completado / en curso / próximo), línea que se dibuja al scroll, imagen excavación (placeholder si falta)
-- [ ] **Distribución de Departamentos:** dos cards (2 y 3 dormitorios), slide al scroll, hover
-- [ ] **Sostenibilidad:** 4 puntos con icono + texto, fondo oscuro, stagger
-- [ ] **Ubicación:** dirección, puntos de referencia, mapa (embed o imagen placeholder)
-- [ ] **CTA de Contacto:** título, descripción, botones Agendar Visita + Llamar
-- [ ] **Footer:** tres columnas, logo, enlaces (a rutas cuando existan o anclas), datos de contacto, copyright
+- [x] **Navbar:** estructura desktop (logo, links a anclas, botón Agendar Visita) + mobile (hamburguesa, Sheet overlay), transparente → opaco al scroll
+- [x] **Hero:** fullscreen, imagen de fondo, texto y CTA, animaciones (zoom imagen, fade-up secuencia)
+- [x] **Sobre el Edificio:** dos columnas, texto + imagen, animaciones al scroll
+- [x] **Características & Amenities:** grid de cards (6 ítems), iconos desde /landing/caracteristicas, stagger y hover
+- [x] **Estadísticas del Edificio:** 4 contadores animados (7, 12, 13, 1 940), fondo oscuro
+- [x] **Avance de Obra:** timeline vertical, hitos con estados (completado / en curso / próximo), línea que se dibuja al scroll, video avance de obra
+- [x] **Distribución de Departamentos:** dos cards (2 y 3 dormitorios), slide al scroll, hover, plano e interior
+- [x] **Sostenibilidad:** 4 puntos con icono + texto, fondo oscuro, stagger
+- [x] **Ubicación:** dirección, puntos de referencia, imagen de mapa (TODO: reemplazar por Google Maps)
+- [x] **CTA de Contacto:** título, descripción, botones Agendar Visita + Llamar
+- [x] **Footer:** tres columnas, logo, enlaces (anclas por ahora; rutas cuando existan), datos de contacto, copyright
 
 ### Rutas futuras (después de la landing)
 - [ ] Libro de Reclamaciones
 - [ ] Términos y Condiciones
 - [ ] (Si aplica) Página Contacto u otras acordadas con el cliente
+
+### TODOs — Distribución y mejoras posteriores
+- [ ] **Botones "Ver detalles":** Hacer funcionales los dos botones "Ver detalles" de la sección Distribución de Departamentos (por ejemplo enlace a modal, página de detalle o ancla con más información de cada tipo de departamento).
+- [ ] **Ampliar sección Distribución:** Además de los departamentos de 2 y 3 dormitorios, agregar en la misma sección (o como subsecciones) las características de: **cocheras**, **primer nivel** y **azotea**.
+
+### TODOs — Ubicación
+- [ ] **Mapa:** Reemplazar la imagen actual de ubicación (`/landing/ubicacion/ubicacion.png`) por un embed de **Google Maps** (iframe o API) para que sea interactivo.

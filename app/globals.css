@@ -6,8 +6,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand — Magistral (directrices §2.1) */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-dark: var(--brand-navy-dark);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-white: var(--brand-white);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-gray-soft: var(--brand-gray-soft);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,6 +56,13 @@
 
 :root {
   --radius: 0.625rem;
+  /* Brand — Magistral Constructora (§2.1) */
+  --brand-navy: #1b3a5c;
+  --brand-navy-dark: #0f2540;
+  --brand-orange: #e8722a;
+  --brand-white: #ffffff;
+  --brand-cream: #f5f0eb;
+  --brand-gray-soft: #8a9bb0;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -123,3 +138,169 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hero — secuencia al cargar (directrices §5.2) */
+@keyframes hero-image-zoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-line-expand {
+  from { width: 0; }
+  to { width: 50px; }
+}
+@keyframes hero-button-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.hero-animate-image { animation: hero-image-zoom 2s ease-out forwards; }
+.hero-animate-subtitle { animation: hero-fade-up 0.8s ease-out 0.3s both; }
+.hero-animate-title { animation: hero-fade-up 1s ease-out 0.6s both; }
+.hero-animate-line { animation: hero-line-expand 0.6s ease-out 1.4s both; }
+.hero-animate-desc { animation: hero-fade-up 0.8s ease-out 1.6s both; }
+.hero-animate-button { animation: hero-button-in 0.5s ease-out 2s both; }
+
+/* Sobre el Edificio — al entrar al viewport (§5.3) */
+@keyframes sobre-edificio-line {
+  to { width: 40px; }
+}
+@keyframes sobre-edificio-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sobre-edificio-slide-in {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.sobre-edificio .sobre-edificio-line { width: 0; overflow: hidden; }
+.sobre-edificio.in-view .sobre-edificio-line { animation: sobre-edificio-line 0.6s ease-out forwards; }
+.sobre-edificio .sobre-edificio-title { opacity: 0; transform: translateY(24px); }
+.sobre-edificio.in-view .sobre-edificio-title { animation: sobre-edificio-fade-up 0.6s ease-out 0.1s forwards; }
+.sobre-edificio .sobre-edificio-p1 { opacity: 0; transform: translateY(24px); }
+.sobre-edificio.in-view .sobre-edificio-p1 { animation: sobre-edificio-fade-up 0.6s ease-out 0.2s forwards; }
+.sobre-edificio .sobre-edificio-p2 { opacity: 0; transform: translateY(24px); }
+.sobre-edificio.in-view .sobre-edificio-p2 { animation: sobre-edificio-fade-up 0.6s ease-out 0.4s forwards; }
+.sobre-edificio .sobre-edificio-img { opacity: 0; transform: translateX(60px); }
+.sobre-edificio.in-view .sobre-edificio-img { animation: sobre-edificio-slide-in 0.7s ease-out 0.2s forwards; }
+
+/* Características — stagger cards al scroll + hover (§5.4) */
+@keyframes caracteristicas-card-in {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Grid wrapper para apuntar bien a las cards (hijos directos) */
+.caracteristicas .caracteristicas-grid > .caracteristicas-card {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(1) { animation: caracteristicas-card-in 0.6s ease-out 0s forwards; }
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(2) { animation: caracteristicas-card-in 0.6s ease-out 0.15s forwards; }
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(3) { animation: caracteristicas-card-in 0.6s ease-out 0.3s forwards; }
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(4) { animation: caracteristicas-card-in 0.6s ease-out 0.45s forwards; }
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(5) { animation: caracteristicas-card-in 0.6s ease-out 0.6s forwards; }
+.caracteristicas.in-view .caracteristicas-grid > .caracteristicas-card:nth-child(6) { animation: caracteristicas-card-in 0.6s ease-out 0.75s forwards; }
+.caracteristicas .caracteristicas-card-link { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+@media (hover: hover) {
+  .caracteristicas .caracteristicas-card-link:hover { transform: scale(1.03); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15); }
+  .caracteristicas .caracteristicas-card-link:hover .caracteristicas-card-line { opacity: 1; }
+}
+.caracteristicas .caracteristicas-card-line { opacity: 0; transition: opacity 0.25s ease; }
+
+/* Avance de Obra — pulso en hito "En curso" (§5.6) */
+@keyframes avance-obra-pulso {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.avance-obra-en-curso { animation: avance-obra-pulso 1.5s ease-in-out infinite; }
+
+/* Distribución de Departamentos — slide cards al scroll + hover (§5.7, §8.8) */
+@keyframes distribucion-slide-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes distribucion-slide-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes distribucion-slide-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.distribucion .distribucion-card-left { opacity: 0; }
+.distribucion .distribucion-card-right { opacity: 0; }
+.distribucion.in-view .distribucion-card-left {
+  animation: distribucion-slide-left 0.7s ease-out forwards;
+}
+.distribucion.in-view .distribucion-card-right {
+  animation: distribucion-slide-right 0.7s ease-out forwards;
+}
+@media (max-width: 1023px) {
+  .distribucion.in-view .distribucion-card-left,
+  .distribucion.in-view .distribucion-card-right {
+    animation-name: distribucion-slide-up;
+  }
+}
+.distribucion .distribucion-card-link { transition: box-shadow 0.25s ease; }
+.distribucion .distribucion-card-link .distribucion-card-line { opacity: 0; transition: opacity 0.25s ease; }
+@media (hover: hover) {
+  .distribucion .distribucion-card-link:hover { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15); }
+  .distribucion .distribucion-card-link:hover .distribucion-card-line { opacity: 1; }
+}
+
+/* Sostenibilidad — stagger puntos al scroll (§5.8) */
+@keyframes sostenibilidad-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sostenibilidad .sostenibilidad-title { opacity: 0; transform: translateY(24px); }
+.sostenibilidad.in-view .sostenibilidad-title { animation: sostenibilidad-fade-up 0.6s ease-out 0s forwards; }
+.sostenibilidad .sostenibilidad-desc { opacity: 0; transform: translateY(24px); }
+.sostenibilidad.in-view .sostenibilidad-desc { animation: sostenibilidad-fade-up 0.6s ease-out 0.1s forwards; }
+.sostenibilidad .sostenibilidad-grid > .sostenibilidad-item { opacity: 0; transform: translateY(24px); }
+.sostenibilidad.in-view .sostenibilidad-grid > .sostenibilidad-item:nth-child(1) { animation: sostenibilidad-fade-up 0.6s ease-out 0.2s forwards; }
+.sostenibilidad.in-view .sostenibilidad-grid > .sostenibilidad-item:nth-child(2) { animation: sostenibilidad-fade-up 0.6s ease-out 0.35s forwards; }
+.sostenibilidad.in-view .sostenibilidad-grid > .sostenibilidad-item:nth-child(3) { animation: sostenibilidad-fade-up 0.6s ease-out 0.5s forwards; }
+.sostenibilidad.in-view .sostenibilidad-grid > .sostenibilidad-item:nth-child(4) { animation: sostenibilidad-fade-up 0.6s ease-out 0.65s forwards; }
+
+/* Ubicación — slide columnas al scroll (§5.9, §8.8) */
+@keyframes ubicacion-slide-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes ubicacion-slide-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes ubicacion-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ubicacion .ubicacion-texto { opacity: 0; }
+.ubicacion .ubicacion-mapa { opacity: 0; }
+.ubicacion.in-view .ubicacion-texto { animation: ubicacion-slide-left 0.6s ease-out 0s forwards; }
+.ubicacion.in-view .ubicacion-mapa { animation: ubicacion-slide-right 0.6s ease-out 0s forwards; }
+@media (max-width: 1023px) {
+  .ubicacion.in-view .ubicacion-texto { animation-name: ubicacion-slide-up; }
+  .ubicacion.in-view .ubicacion-mapa { animation: ubicacion-slide-up 0.6s ease-out 0.2s forwards; }
+}
+
+/* CTA de Contacto — título, descripción, botones (§5.10) */
+@keyframes cta-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cta-button-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cta-contacto .cta-title { opacity: 0; }
+.cta-contacto .cta-desc { opacity: 0; }
+.cta-contacto .cta-btn1 { opacity: 0; transform: scale(0.95); }
+.cta-contacto .cta-btn2 { opacity: 0; transform: scale(0.95); }
+.cta-contacto.in-view .cta-title { animation: cta-fade-in 0.6s ease-out 0s forwards; }
+.cta-contacto.in-view .cta-desc { animation: cta-fade-in 0.6s ease-out 0.2s forwards; }
+.cta-contacto.in-view .cta-btn1 { animation: cta-button-in 0.5s ease-out 0.4s forwards; }
+.cta-contacto.in-view .cta-btn2 { animation: cta-button-in 0.5s ease-out 0.55s forwards; }
