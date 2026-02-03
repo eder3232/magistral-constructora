@@ -44,7 +44,7 @@ const ITEMS = [
   },
   {
     icon: "/landing/caracteristicas/bed.png",
-    title: "2 y 3 Dormitorios",
+    title: "Departamentos de 2 y 3 Dormitorios",
     description:
       "Espacios amplios y funcionales adaptados para familias de diferentes tamaños.",
   },
