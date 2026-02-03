@@ -1,0 +1,16 @@
+---
+description: Ejecución de comandos en terminal para este proyecto
+alwaysApply: true
+---
+
+# Comandos en línea de comandos
+
+En este proyecto **todas las dependencias se gestionan con pnpm**. No uses npm ni yarn.
+
+Cuando haga falta ejecutar algo en la terminal (instalar paquetes, iniciar servidor, etc.):
+
+- **Indica los comandos exactos en el chat** para que el usuario los ejecute en su máquina.
+- **No ejecutes tú** comandos de instalación o que modifiquen el entorno (por ejemplo `pnpm add`, `pnpm install`, `npx shadcn@latest init`).
+- El usuario correrá los comandos y te dará retroalimentación si algo falla o si ya terminó.
+
+Ejemplo: para instalar una dependencia, escribe en el chat algo como: "Ejecuta en la raíz del proyecto: `pnpm add gsap`".
