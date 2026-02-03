@@ -54,8 +54,10 @@ export function DistribucionDepartamentos() {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [selectedId, setSelectedId] = useState<string>(NIVELES[0].id);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const selected = NIVELES.find((n) => n.id === selectedId) ?? NIVELES[0];
+  const preloadSizes = "(max-width: 1023px) 100vw, 60vw";
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -86,56 +88,97 @@ export function DistribucionDepartamentos() {
 
         {/*
           LAYOUT DESKTOP (lg): 60% previsualización imagen | 40% lista de botones.
-          Contenedor de imagen con tamaño fijo; las imágenes se adaptan con object-contain.
-          Mobile: pendiente de implementar (actualmente se muestra el mismo contenido apilado).
+          LAYOUT MOBILE: imagen + descarga sticky arriba; lista de botones debajo (scroll).
         */}
         <div className="mt-10 flex flex-col gap-6 lg:mt-12 lg:flex-row lg:gap-8">
-          {/* Columna izquierda — 60% — Previsualización (solo aplica en desktop) */}
+          {/* Columna izquierda — 60% en desktop; en mobile bloque sticky (imagen + descarga) */}
           <div className="lg:w-[60%] lg:min-w-0 lg:flex-shrink-0">
-            {/* Contenedor de ancho fijo: no cambia de tamaño al cambiar de imagen */}
-            <div
-              className="relative w-full overflow-hidden rounded-xl border bg-muted/30"
-              style={{ aspectRatio: "4/3" }}
-            >
+            {/* En mobile: sticky para que la imagen siga visible al hacer scroll en la lista */}
+            <div className="sticky top-0 z-10 -mx-4 bg-background px-4 pb-4 lg:static lg:mx-0 lg:px-0 lg:pb-0">
+              {/* Contenedor de ancho fijo: no cambia de tamaño al cambiar de imagen */}
+              <div
+                className="relative w-full overflow-hidden rounded-xl border bg-muted/30"
+                style={{ aspectRatio: "4/3" }}
+              >
+              {/* Imagen visible */}
               <Image
                 key={selected.id}
                 src={selected.image}
                 alt={`Plano de planta - ${selected.label}`}
                 fill
-                sizes="(max-width: 1023px) 100vw, 60vw"
+                sizes={preloadSizes}
                 className="object-contain p-4"
               />
+              {/* Precarga: al entrar la sección en vista se cargan todas (Next/Image = misma URL optimizada). Al hacer hover se prioriza esa imagen. */}
+              {inView && (
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0"
+                  aria-hidden
+                >
+                  {NIVELES.map((nivel) => (
+                    <div key={nivel.id} className="absolute inset-0">
+                      <Image
+                        src={nivel.image}
+                        alt=""
+                        fill
+                        sizes={preloadSizes}
+                        className="object-contain p-4"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {hoveredId && hoveredId !== selectedId && (
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0"
+                  aria-hidden
+                >
+                  <Image
+                    src={
+                      NIVELES.find((n) => n.id === hoveredId)?.image ??
+                      NIVELES[0].image
+                    }
+                    alt=""
+                    fill
+                    sizes={preloadSizes}
+                    className="object-contain p-4"
+                  />
+                </div>
+              )}
             </div>
-            <a
-              href={selected.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex"
-              download
-              aria-label={`Descargar plano en PDF - ${selected.label}`}
-            >
-              <Button type="button" variant="outline" className="gap-2">
-                <Download className="h-4 w-4" aria-hidden />
-                Descargar plano PDF
-              </Button>
-            </a>
+              <a
+                href={selected.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex"
+                download
+                aria-label={`Descargar plano en PDF - ${selected.label}`}
+              >
+                <Button type="button" variant="outline" className="gap-2">
+                  <Download className="h-4 w-4" aria-hidden />
+                  Descargar plano PDF
+                </Button>
+              </a>
+            </div>
           </div>
 
-          {/* Columna derecha — 40% — Lista de botones por nivel (pares 101-102, etc.; semisótano/sótano a ancho completo) */}
+          {/* Columna derecha — 40% en desktop; en mobile lista debajo de la imagen sticky */}
           <div className="lg:w-[40%] lg:min-w-0 lg:flex-shrink-0">
             <p className="mb-3 text-sm font-medium text-muted-foreground">
               Seleccione un departamento o nivel
             </p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
               {NIVELES.map((nivel) => (
                 <Button
                   key={nivel.id}
                   variant={selectedId === nivel.id ? "default" : "outline"}
                   className={cn(
-                    "min-h-11",
+                    "min-h-10 text-sm sm:min-h-11 sm:text-base",
                     nivel.fullWidth && "col-span-2"
                   )}
                   onClick={() => setSelectedId(nivel.id)}
+                  onMouseEnter={() => setHoveredId(nivel.id)}
+                  onMouseLeave={() => setHoveredId(null)}
                   aria-pressed={selectedId === nivel.id}
                   aria-label={`Plano ${nivel.label}`}
                 >
