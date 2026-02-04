@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-/** Reemplazar cuando esté disponible el dato real */
-const TELEFONO_DISPLAY = "+51 XXX XXX XXX";
-const TELEFONO_HREF = "tel:+51";
-const EMAIL = "contacto@magistralconstruc.com";
-const DIRECCION = "Calle Los Arces N°220, Cayma, Arequipa";
+import { SITE_CONTACT } from "@/lib/site-config";
 
 const ENLACES_PROYECTO = [
   { href: "#el-proyecto", label: "El Edificio" },
@@ -74,21 +69,21 @@ export function Footer() {
               Contacto
             </h3>
             <address className="mt-3 not-italic text-sm text-brand-white/80">
-              <p>{DIRECCION}</p>
+              <p>{SITE_CONTACT.direccion}</p>
               <p className="mt-2">
                 <a
-                  href={TELEFONO_HREF}
+                  href={SITE_CONTACT.telefonoHref}
                   className="transition-colors hover:text-brand-white"
                 >
-                  {TELEFONO_DISPLAY}
+                  {SITE_CONTACT.telefonoDisplay}
                 </a>
               </p>
               <p className="mt-2">
                 <a
-                  href={`mailto:${EMAIL}`}
+                  href={`mailto:${SITE_CONTACT.email}`}
                   className="transition-colors hover:text-brand-white"
                 >
-                  {EMAIL}
+                  {SITE_CONTACT.email}
                 </a>
               </p>
             </address>

@@ -4,13 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SITE_CONTACT } from "@/lib/site-config";
 
 const ROOT_MARGIN = "0px 0px -100px 0px";
 const THRESHOLD = 0;
-
-/** Reemplazar con el número real cuando esté disponible */
-const TELEFONO_DISPLAY = "+51 913 367 960";
-const TELEFONO_HREF = "tel:+51913367960    "; // placeholder; usar tel:+51987654321 cuando haya número real
 
 export function CtaContacto() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -58,14 +55,14 @@ export function CtaContacto() {
             <Link href="#contacto">Agendar Visita</Link>
           </Button>
           <Button
-            asChild
             size="lg"
             variant="outline"
-            className="cta-btn2 min-h-[44px] w-full border-2 border-brand-white bg-transparent text-brand-white hover:bg-brand-white/10 sm:w-auto"
+            className="cta-btn2 min-h-[44px] w-full border-2 border-brand-white bg-transparent text-brand-white hover:bg-brand-white/70 sm:w-auto"
+            asChild
           >
-            <a href={TELEFONO_HREF}>
-              Llamar al {TELEFONO_DISPLAY}
-            </a>
+            <Link href={SITE_CONTACT.telefonoHref}>
+              Llamar al {SITE_CONTACT.telefonoDisplay}
+            </Link>
           </Button>
         </div>
       </div>
