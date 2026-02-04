@@ -65,14 +65,14 @@ export function Estadisticas() {
         },
         onComplete: hasSuffix
           ? () => {
-              if (suffixRef.current) {
-                gsap.fromTo(
-                  suffixRef.current,
-                  { opacity: 0 },
-                  { opacity: 1, duration: 0.4 }
-                );
-              }
+            if (suffixRef.current) {
+              gsap.fromTo(
+                suffixRef.current,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.4 }
+              );
             }
+          }
           : undefined,
       });
     });
@@ -92,7 +92,7 @@ export function Estadisticas() {
               key={stat.label}
               className="flex flex-col items-center text-center"
             >
-              <div className="font-display text-5xl font-bold text-brand-white md:text-6xl lg:text-7xl">
+              <div className="font-display text-5xl font-bold text-brand-white md:text-6xl lg:text-6xl">
                 <span
                   ref={(el) => {
                     numberRefs.current[i] = el;

@@ -7,10 +7,10 @@ import { Estadisticas } from "@/components/estadisticas";
 import { AvanceDeObra } from "@/components/avance-de-obra";
 import { DistribucionDepartamentos } from "@/components/distribucion-departamentos";
 import { Sostenibilidad } from "@/components/sostenibilidad";
-import { Ubicacion } from "@/components/ubicacion";
 import { CtaContacto } from "@/components/cta-contacto";
 import { Footer } from "@/components/footer";
-import LocationShowcase from "@/components/ubicacion/LocationShowcase";
+import { UbicacionSection } from "@/components/ubicacion/UbicacionSection";
+
 
 export default function Home() {
   return (
@@ -41,8 +41,7 @@ export default function Home() {
         <Sostenibilidad />
 
         {/* 8. Ubicación */}
-        <Ubicacion />
-        <LocationShowcase />
+        <UbicacionSection />
 
         {/* 9. CTA de Contacto */}
         <CtaContacto />
