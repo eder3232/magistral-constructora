@@ -86,6 +86,14 @@ export function Footer() {
                   {SITE_CONTACT.email}
                 </a>
               </p>
+              <p className="mt-2">
+                <Link
+                  href="/libro-reclamaciones"
+                  className="transition-colors hover:text-brand-white"
+                >
+                  Libro de reclamaciones
+                </Link>
+              </p>
             </address>
           </div>
         </div>

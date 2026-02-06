@@ -7,6 +7,9 @@ export const SITE_CONTACT = {
   telefonoDisplay: "+51 913 367 960",
   /** Valor para enlaces tel: (sin espacios) */
   telefonoHref: "tel:+51913367960",
+  /** Email de contacto general (footer, contacto) */
   email: "atencionalcliente@magistralconstructora.com",
+  /** Email receptor oficial del Libro de Reclamaciones (Soporte) */
+  emailSoporte: "eder.learning.tiktok@outlook.com",
   direccion: "Calle Los Arces N°220, Cayma, Arequipa",
 } as const;

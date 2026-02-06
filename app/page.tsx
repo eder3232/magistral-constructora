@@ -8,8 +8,8 @@ import { DistribucionDepartamentos } from "@/components/distribucion-departament
 import { Sostenibilidad } from "@/components/sostenibilidad";
 import { CtaContacto } from "@/components/cta-contacto";
 import { UbicacionSection } from "@/components/ubicacion/UbicacionSection";
-import { CaracteristicasV2 } from "@/components/caracteristicas_v2";
-import { ParrallaxImageMarquee } from "@/components/parrallax_image_marquee";
+import { CaracteristicasV2 } from "@/components/caracteristicas-v2";
+import { ParrallaxImageMarquee } from "@/components/parrallax-image-marquee";
 
 export default function Home() {
   return (
