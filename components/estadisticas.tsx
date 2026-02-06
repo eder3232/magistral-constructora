@@ -2,13 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { cn } from "@/lib/utils";
-
 const STATS = [
   { value: 7, label: "Pisos" },
   { value: 12, label: "Departamentos" },
   { value: 13, label: "Estacionamientos" },
-  { value: 1940, label: "m² de área total", suffix: " m²" },
+  { value: 1940, label: "m² de área total" },
 ] as const;
 
 const ROOT_MARGIN = "0px 0px -100px 0px";
@@ -17,7 +15,6 @@ const THRESHOLD = 0;
 export function Estadisticas() {
   const sectionRef = useRef<HTMLElement>(null);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const suffixRef = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
   const animated = useRef(false);
 
@@ -52,7 +49,6 @@ export function Estadisticas() {
       const el = refs[i];
       if (!el) return;
 
-      const hasSuffix = "suffix" in stat && stat.suffix;
       const obj = { value: 0 };
 
       gsap.to(obj, {
@@ -63,17 +59,6 @@ export function Estadisticas() {
         onUpdate: () => {
           el.textContent = Math.round(obj.value).toLocaleString("es-PE");
         },
-        onComplete: hasSuffix
-          ? () => {
-            if (suffixRef.current) {
-              gsap.fromTo(
-                suffixRef.current,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.4 }
-              );
-            }
-          }
-          : undefined,
       });
     });
   }, [inView]);
@@ -100,22 +85,8 @@ export function Estadisticas() {
                 >
                   0
                 </span>
-                {"suffix" in stat && stat.suffix ? (
-                  <span
-                    ref={suffixRef}
-                    className="opacity-0"
-                    aria-hidden
-                  >
-                    {stat.suffix}
-                  </span>
-                ) : null}
               </div>
-              <div
-                className={cn(
-                  "mt-3 h-0.5 w-12 rounded-full bg-brand-orange",
-                  "suffix" in stat && stat.suffix && "lg:w-14"
-                )}
-              />
+              <div className="mt-3 h-0.5 w-12 rounded-full bg-brand-orange" />
               <p className="mt-3 text-base text-brand-white/90 md:text-lg">
                 {stat.label}
               </p>

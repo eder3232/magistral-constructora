@@ -58,11 +58,8 @@ export function CtaContacto() {
             size="lg"
             variant="outline"
             className="cta-btn2 min-h-[44px] w-full border-2 border-brand-white bg-transparent text-brand-white hover:bg-brand-white/70 sm:w-auto"
-            asChild
           >
-            <Link href={SITE_CONTACT.telefonoHref}>
-              Llamar al {SITE_CONTACT.telefonoDisplay}
-            </Link>
+            Llamar al {SITE_CONTACT.telefonoDisplay}
           </Button>
         </div>
       </div>

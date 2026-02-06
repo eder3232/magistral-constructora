@@ -14,11 +14,15 @@ import {
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { cn } from "@/lib/utils";
 
+// TODO: Transición a rutas — Actualmente varios ítems apuntan a secciones del home (/#...).
+// A futuro todos los elementos del nav serán rutas (/nosotros, /contacto, /proyecto, etc.);
+// no habrá links a anclas del home. Cuando se migre, reemplazar cada href por su ruta.
 const NAV_LINKS = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#el-proyecto", label: "El Proyecto" },
-  { href: "#caracteristicas", label: "Características" },
-  { href: "#ubicacion", label: "Ubicación" },
+  { href: "/#inicio", label: "Inicio" }, // TODO: ruta actual es home; puede quedarse como "/"
+  { href: "/#el-proyecto", label: "El Proyecto" }, // TODO: futura ruta ej. /proyecto
+  { href: "/#caracteristicas", label: "Características" }, // TODO: futura ruta si aplica
+  { href: "/#ubicacion", label: "Ubicación" }, // TODO: futura ruta ej. /ubicacion
+  { href: "/nosotros", label: "Nosotros" }, // ya es ruta
 ] as const;
 
 export function Navbar() {
@@ -44,9 +48,9 @@ export function Navbar() {
         aria-label="Navegación principal"
       >
         <nav className="mx-auto flex min-h-[44px] max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
-          {/* Logo */}
+          {/* Logo — TODO: cuando el nav sea solo rutas, mantener href="/" */}
           <Link
-            href="#inicio"
+            href="/"
             className={cn(
               "flex shrink-0 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
               scrolled
@@ -68,7 +72,7 @@ export function Navbar() {
           {/* Desktop: links + CTA */}
           <div className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
@@ -79,14 +83,15 @@ export function Navbar() {
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
+            {/* TODO: CTA — actualmente ancla #contacto en home; futura ruta /contacto */}
             <Button
               asChild
               size="lg"
               className="min-h-[44px] bg-brand-orange px-6 text-brand-white hover:bg-brand-orange/90"
             >
-              <Link href="#contacto">Agendar Visita</Link>
+              <Link href="/#contacto">Agendar Visita</Link>
             </Button>
           </div>
 
@@ -116,12 +121,12 @@ export function Navbar() {
               <div className="flex flex-col items-center gap-2 text-center">
                 {NAV_LINKS.map((link) => (
                   <SheetClose asChild key={link.href}>
-                    <a
+                    <Link
                       href={link.href}
                       className="flex min-h-[44px] items-center justify-center text-lg font-medium text-brand-white transition-opacity hover:opacity-90"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </SheetClose>
                 ))}
                 <SheetClose asChild>
@@ -130,7 +135,7 @@ export function Navbar() {
                     size="lg"
                     className="mt-4 min-h-[44px] w-full max-w-xs bg-brand-orange text-brand-white hover:bg-brand-orange/90"
                   >
-                    <Link href="#contacto">Agendar Visita</Link>
+                    <Link href="/#contacto">Agendar Visita</Link>
                   </Button>
                 </SheetClose>
               </div>
