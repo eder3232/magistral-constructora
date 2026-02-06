@@ -13,8 +13,6 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SITE_CONTACT } from "@/lib/site-config";
@@ -99,8 +97,6 @@ const DIFERENCIALES = [
 export default function NosotrosPage() {
   return (
     <>
-      <Navbar />
-      <main>
         {/* Hero */}
         <section
           className="relative flex min-h-[50vh] items-center justify-center overflow-hidden"
@@ -504,8 +500,6 @@ export default function NosotrosPage() {
             </Button>
           </div>
         </section>
-      </main>
-      <Footer />
     </>
   );
 }

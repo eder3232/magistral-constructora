@@ -20,9 +20,8 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { href: "/#inicio", label: "Inicio" }, // TODO: ruta actual es home; puede quedarse como "/"
   { href: "/#el-proyecto", label: "El Proyecto" }, // TODO: futura ruta ej. /proyecto
-  { href: "/#caracteristicas", label: "Características" }, // TODO: futura ruta si aplica
-  { href: "/#ubicacion", label: "Ubicación" }, // TODO: futura ruta ej. /ubicacion
-  { href: "/nosotros", label: "Nosotros" }, // ya es ruta
+  { href: "/nosotros", label: "Nosotros" },
+  { href: "/contacto", label: "Contacto" },
 ] as const;
 
 export function Navbar() {
@@ -52,7 +51,7 @@ export function Navbar() {
           <Link
             href="/"
             className={cn(
-              "flex shrink-0 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+              "flex shrink-0 items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
               scrolled
                 ? "focus-visible:ring-brand-white focus-visible:ring-offset-brand-navy-dark"
                 : "focus-visible:ring-foreground focus-visible:ring-offset-background"
@@ -61,12 +60,22 @@ export function Navbar() {
           >
             <Image
               src="/brand/logo_magistral.svg"
-              alt="Magistral Constructora"
+              alt=""
               width={120}
               height={40}
               className="h-8 w-auto lg:h-10"
               priority
             />
+            {/* Mobile: solo nombre corto para no saturar; desktop: nombre completo */}
+            <span
+              className={cn(
+                "font-semibold tracking-tight",
+                scrolled ? "text-brand-white" : "text-foreground"
+              )}
+            >
+              <span className="lg:hidden">Magistral</span>
+              <span className="hidden lg:inline">Magistral Constructora</span>
+            </span>
           </Link>
 
           {/* Desktop: links + CTA */}
