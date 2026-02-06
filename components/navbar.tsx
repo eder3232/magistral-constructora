@@ -11,6 +11,7 @@ import {
   SheetClose,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -136,6 +137,9 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
         </nav>
+        <ScrollProgress
+          className="!top-[calc(4.25rem+env(safe-area-inset-top,0px))] bg-brand-orange"
+        />
       </header>
     </>
   );

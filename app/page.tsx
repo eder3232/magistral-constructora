@@ -10,6 +10,7 @@ import { Sostenibilidad } from "@/components/sostenibilidad";
 import { CtaContacto } from "@/components/cta-contacto";
 import { Footer } from "@/components/footer";
 import { UbicacionSection } from "@/components/ubicacion/UbicacionSection";
+import { CaracteristicasV2 } from "@/components/caracteristicas_v2";
 
 
 export default function Home() {
@@ -26,7 +27,8 @@ export default function Home() {
         <SobreElEdificio />
 
         {/* 3. Características & Amenities */}
-        <Caracteristicas />
+        {/* <Caracteristicas /> */}
+        <CaracteristicasV2 />
 
         {/* 4. Estadísticas del Edificio */}
         <Estadisticas />
