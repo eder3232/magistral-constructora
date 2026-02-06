@@ -1,0 +1,39 @@
+/* Marquee — animación en CSS (no en @theme: no se emite correctamente en Tailwind v4) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+.animate-marquee-reverse {
+  animation: marquee var(--duration) infinite linear reverse;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical-reverse {
+  animation: marquee-vertical var(--duration) linear infinite reverse;
+}
+
+/* Ancho fijo opcional para igualar velocidad entre varias filas (--marquee-content-width) */
+.marquee-track {
+  width: var(--marquee-content-width, max-content);
+}

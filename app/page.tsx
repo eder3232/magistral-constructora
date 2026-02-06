@@ -11,6 +11,7 @@ import { CtaContacto } from "@/components/cta-contacto";
 import { Footer } from "@/components/footer";
 import { UbicacionSection } from "@/components/ubicacion/UbicacionSection";
 import { CaracteristicasV2 } from "@/components/caracteristicas_v2";
+import { ParrallaxImageMarquee } from "@/components/parrallax_image_marquee";
 
 
 export default function Home() {
@@ -41,6 +42,8 @@ export default function Home() {
 
         {/* 7. Sostenibilidad */}
         <Sostenibilidad />
+
+        <ParrallaxImageMarquee />
 
         {/* 8. Ubicación */}
         <UbicacionSection />
