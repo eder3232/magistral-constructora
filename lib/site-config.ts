@@ -1,5 +1,5 @@
 /**
- * Configuración centralizada del sitio (contacto, dirección).
+ * Configuración centralizada del sitio (contacto, dirección, redes).
  * Modificar aquí para que los cambios se reflejen en toda la página.
  */
 export const SITE_CONTACT = {
@@ -13,3 +13,9 @@ export const SITE_CONTACT = {
   emailSoporte: "eder.learning.tiktok@outlook.com",
   direccion: "Calle Los Arces N°220, Cayma, Arequipa",
 } as const;
+
+/** URLs de redes sociales para el footer. Reemplazar con las reales de la empresa. */
+export const SITE_SOCIAL = [
+  { url: "https://www.facebook.com/magistralconstructora", label: "Facebook" },
+  { url: "https://www.instagram.com/magistraldeluxeinmobiliaria/", label: "Instagram" },
+] as const;
